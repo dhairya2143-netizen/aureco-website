@@ -3,7 +3,7 @@
 export const heroData = {
   headline: "Packaging with Purpose.",
   subheadline: "Premium packaging solutions for fashion and jewelry brands.",
-  image: "https://images.unsplash.com/photo-1759563874676-0ac718a8f17b"
+  image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/8757jka0_51cb4f08-3086-402c-94fe-3e5918306d1b%20%281%29.png"
 };
 
 export const aboutData = {
@@ -15,45 +15,73 @@ export const aboutData = {
 export const products = [
   {
     id: 1,
-    name: "Woven Care Labels",
-    description: "The name inside every garment.",
-    image: "https://images.unsplash.com/photo-1542272606-fe889704e0f6",
+    name: "Tags",
+    description: "Premium hang tags that make the first impression.",
+    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/0cexqddt_ChatGPT%20Image%20Apr%2017%2C%202026%2C%2006_48_15%20PM.png",
     icon: "Tag"
   },
   {
     id: 2,
-    name: "Hang Tags",
-    description: "The first impression before the first wear.",
-    image: "https://images.unsplash.com/photo-1542272606-fe889704e0f6",
-    icon: "ShoppingTag"
+    name: "Thank You Cards",
+    description: "Express gratitude with elegant branded cards.",
+    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/78ax929n_0429a4f3-fb23-476f-aa74-931917ccda4a.png",
+    icon: "Heart"
   },
   {
     id: 3,
-    name: "Tissue Wrapping Paper",
-    description: "Unfold the experience.",
-    image: "https://images.unsplash.com/photo-1704634616623-b14a1a192a49",
-    icon: "Sparkles"
+    name: "Wrapping Papers with Stickers",
+    description: "Custom branded wrapping paper and matching stickers.",
+    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/8757jka0_51cb4f08-3086-402c-94fe-3e5918306d1b%20%281%29.png",
+    icon: "Gift"
   },
   {
     id: 4,
-    name: "Paper Bags",
-    description: "Carry your brand further.",
-    image: "https://images.unsplash.com/photo-1695245503558-5cdb37f49092",
+    name: "Tote Bags",
+    description: "Reusable cotton tote bags for everyday elegance.",
+    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/8757jka0_51cb4f08-3086-402c-94fe-3e5918306d1b%20%281%29.png",
     icon: "ShoppingBag"
   },
   {
     id: 5,
-    name: "Jute Bags",
-    description: "Sustainable. Reusable. Remarkable.",
-    image: "https://images.unsplash.com/photo-1615485737442-7d6ab9f64db9",
-    icon: "Leaf"
+    name: "Flapbags",
+    description: "Premium paper bags with branded fold-over flaps.",
+    image: "https://images.unsplash.com/photo-1695245503558-5cdb37f49092",
+    icon: "Package"
   },
   {
     id: 6,
-    name: "Branded Inserts",
-    description: "The detail inside the detail.",
-    image: "https://images.unsplash.com/photo-1623305465231-d884ce752d59",
-    icon: "FileText"
+    name: "Drawstring Bags",
+    description: "Soft jute drawstring bags for jewelry and accessories.",
+    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/a55du9re_premium_1.jpg",
+    icon: "Leaf"
+  },
+  {
+    id: 7,
+    name: "Labels - Cotton, Woven, Satin",
+    description: "The name inside every garment.",
+    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/lq1lnmlh_premium_2.jpg",
+    icon: "Tag"
+  },
+  {
+    id: 8,
+    name: "Waterproof Kraft Mailers",
+    description: "Durable, eco-friendly shipping solutions.",
+    image: "https://images.unsplash.com/photo-1704634616623-b14a1a192a49",
+    icon: "Mail"
+  },
+  {
+    id: 9,
+    name: "Shopping Bags",
+    description: "Carry your brand further with premium paper bags.",
+    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/8757jka0_51cb4f08-3086-402c-94fe-3e5918306d1b%20%281%29.png",
+    icon: "ShoppingCart"
+  },
+  {
+    id: 10,
+    name: "Ecobox",
+    description: "Sustainable packaging boxes for conscious brands.",
+    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/vgqxluvq_premium_3.jpg",
+    icon: "Box"
   }
 ];
 
@@ -85,12 +113,16 @@ export const industries = [
 ];
 
 export const packagingTypes = [
-  "Woven Care Labels",
-  "Hang Tags",
-  "Tissue Wrapping Paper",
-  "Paper Bags",
-  "Jute Bags",
-  "Branded Inserts",
+  "Tags",
+  "Thank You Cards",
+  "Wrapping Papers with Stickers",
+  "Tote Bags",
+  "Flapbags",
+  "Drawstring Bags",
+  "Labels - Cotton, Woven, Satin",
+  "Waterproof Kraft Mailers",
+  "Shopping Bags",
+  "Ecobox",
   "Single Product Solution",
   "Multiple Products",
   "Custom Packaging Solution"

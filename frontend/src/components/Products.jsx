@@ -1,16 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { products } from '../mockData';
-import { Tag, ShoppingBag, Sparkles, FileText, Leaf, ShoppingCart } from 'lucide-react';
+import { Tag, ShoppingBag, Leaf, ShoppingCart, Package, Mail, Box, Gift, Heart } from 'lucide-react';
 import ProductGalleryModal from './ProductGalleryModal';
 
 const iconMap = {
   Tag: Tag,
   ShoppingTag: Tag,
   ShoppingBag: ShoppingBag,
-  Sparkles: Sparkles,
-  FileText: FileText,
   Leaf: Leaf,
-  Store: ShoppingCart
+  Store: ShoppingCart,
+  ShoppingCart: ShoppingCart,
+  Package: Package,
+  Mail: Mail,
+  Box: Box,
+  Gift: Gift,
+  Heart: Heart
 };
 
 const Products = () => {

@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { packagingTypes } from '../mockData';
 import { toast } from 'sonner';
+import axios from 'axios';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const Contact = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -46,19 +49,25 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Mock submission - will be replaced with actual API call
-    setTimeout(() => {
-      console.log('Form submitted:', formData);
-      toast.success('Thank you! We will respond within 24 hours.');
-      setFormData({
-        name: '',
-        company: '',
-        email: '',
-        packagingType: '',
-        message: ''
-      });
+    try {
+      const response = await axios.post(`${BACKEND_URL}/api/contact/send-quote`, formData);
+      
+      if (response.data.status === 'success') {
+        toast.success('Thank you! We will respond within 24 hours.');
+        setFormData({
+          name: '',
+          company: '',
+          email: '',
+          packagingType: '',
+          message: ''
+        });
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      toast.error('Failed to send enquiry. Please try again or email us directly at aurecopackaging@gmail.com');
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   };
 
   return (
