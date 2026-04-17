@@ -147,7 +147,7 @@ const Contact = () => {
 
         <div className={`contact-info ${isVisible ? 'visible' : ''}`}>
           <p>We typically respond within 24 hours.</p>
-          <a href="mailto:hello@aureco.com">hello@aureco.com</a>
+          <a href="mailto:aurecopackaging@gmail.com">aurecopackaging@gmail.com</a>
         </div>
       </div>
     </section>

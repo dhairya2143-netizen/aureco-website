@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { industries } from '../mockData';
-import { Scissors, Shirt, Store } from 'lucide-react';
+import { Scissors, Shirt, Store, Gem } from 'lucide-react';
 
 const iconMap = {
   Scissors: Scissors,
   Shirt: Shirt,
-  Store: Store
+  Store: Store,
+  Gem: Gem
 };
 
 const Industries = () => {

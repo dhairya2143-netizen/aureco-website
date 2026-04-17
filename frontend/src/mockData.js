@@ -1,10 +1,9 @@
 // Mock data for Aureco website
 
 export const heroData = {
-  headline: "Wrapped in Intent. Built for Brands.",
-  subheadline: "Aureco crafts the packaging details that fashion brands are remembered by — from the label inside your T-shirt to the bag it goes home in.",
-  ctaText: "Request a Quote",
-  image: "https://images.unsplash.com/photo-1648587456176-4969b0124b12"
+  headline: "Packaging with Purpose.",
+  subheadline: "Premium packaging solutions for fashion and jewelry brands.",
+  image: "https://images.unsplash.com/photo-1759563874676-0ac718a8f17b"
 };
 
 export const aboutData = {
@@ -73,6 +72,12 @@ export const industries = [
   },
   {
     id: 3,
+    title: "Jewelry Boutiques",
+    description: "Premium jute bags and elegant packaging for your precious pieces.",
+    icon: "Gem"
+  },
+  {
+    id: 4,
     title: "Boutique Retailers",
     description: "Stand out with custom packaging that reflects your unique retail experience.",
     icon: "Store"
@@ -99,8 +104,8 @@ export const navLinks = [
 ];
 
 export const footerData = {
-  tagline: "Wrapped in Intent. Built for Brands.",
-  email: "hello@aureco.com",
-  phone: "+1 (555) 123-4567",
+  tagline: "Packaging with Purpose.",
+  email: "aurecopackaging@gmail.com",
+  phone: "+91 70414 97055",
   copyright: "© 2025 Aureco. All rights reserved."
 };

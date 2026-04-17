@@ -3,7 +3,7 @@ import { MessageCircle, X } from 'lucide-react';
 
 const WhatsAppButton = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const whatsappNumber = '+15551234567'; // Replace with actual WhatsApp number
+  const whatsappNumber = '+917041497055';
   const defaultMessage = 'Hi! I would like to inquire about your packaging solutions.';
 
   const handleWhatsAppClick = () => {

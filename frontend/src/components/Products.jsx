@@ -16,8 +16,9 @@ const iconMap = {
 const Products = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [visibleCards, setVisibleCards] = useState([]);
   const sectionRef = useRef(null);
-  const scrollContainerRef = useRef(null);
+  const cardsRef = useRef([]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -40,21 +41,52 @@ const Products = () => {
     };
   }, []);
 
+  useEffect(() => {
+    // Create intersection observer for individual cards
+    const cardObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const cardId = entry.target.getAttribute('data-card-id');
+            setVisibleCards((prev) => [...new Set([...prev, cardId])]);
+          }
+        });
+      },
+      {
+        threshold: 0.3,
+        rootMargin: '0px'
+      }
+    );
+
+    // Observe all card elements
+    cardsRef.current.forEach((card) => {
+      if (card) cardObserver.observe(card);
+    });
+
+    return () => {
+      cardsRef.current.forEach((card) => {
+        if (card) cardObserver.unobserve(card);
+      });
+    };
+  }, [isVisible]);
+
   return (
     <section id="products" className="products-section" ref={sectionRef}>
       <div className="products-header">
         <h2 className={`products-title ${isVisible ? 'visible' : ''}`}>What We Make</h2>
       </div>
       
-      <div className="products-carousel" ref={scrollContainerRef}>
+      <div className="products-carousel">
         <div className="products-track">
           {products.map((product, index) => {
             const IconComponent = iconMap[product.icon] || Tag;
+            const isCardVisible = visibleCards.includes(product.id.toString());
             return (
               <div
                 key={product.id}
-                className={`product-card ${isVisible ? 'visible' : ''}`}
-                style={{ animationDelay: `${index * 0.1}s` }}
+                ref={(el) => (cardsRef.current[index] = el)}
+                data-card-id={product.id}
+                className={`product-card ${isCardVisible ? 'card-visible' : ''}`}
                 onClick={() => setSelectedProduct(product)}
               >
                 <div className="product-image" style={{ backgroundImage: `url(${product.image})` }}>
