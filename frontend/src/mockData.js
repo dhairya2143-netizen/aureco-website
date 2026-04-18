@@ -24,28 +24,28 @@ export const products = [
     id: 2,
     name: "Thank You Cards",
     description: "Express gratitude with elegant branded cards.",
-    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/78ax929n_0429a4f3-fb23-476f-aa74-931917ccda4a.png",
+    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/l074bovr_thank%20you%20cards.png",
     icon: "Heart"
   },
   {
     id: 3,
     name: "Wrapping Papers with Stickers",
     description: "Custom branded wrapping paper and matching stickers.",
-    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/8757jka0_51cb4f08-3086-402c-94fe-3e5918306d1b%20%281%29.png",
+    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/pgsq3jgs_wrapping%20papers.png",
     icon: "Gift"
   },
   {
     id: 4,
     name: "Tote Bags",
     description: "Reusable cotton tote bags for everyday elegance.",
-    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/8757jka0_51cb4f08-3086-402c-94fe-3e5918306d1b%20%281%29.png",
+    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/ceaa8suk_tote%20bag.png",
     icon: "ShoppingBag"
   },
   {
     id: 5,
     name: "Flapbags",
     description: "Premium paper bags with branded fold-over flaps.",
-    image: "https://images.unsplash.com/photo-1695245503558-5cdb37f49092",
+    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/xncifeyv_flap%20bags.png",
     icon: "Package"
   },
   {
@@ -80,7 +80,7 @@ export const products = [
     id: 10,
     name: "Ecobox",
     description: "Sustainable packaging boxes for conscious brands.",
-    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/vgqxluvq_premium_3.jpg",
+    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/obo8gqnr_ecoboxes.jpeg",
     icon: "Box"
   }
 ];
