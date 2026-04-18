@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { packagingTypes } from '../mockData';
 import { toast } from 'sonner';
-import axios from 'axios';
-
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+import { supabase } from '../supabaseClient';
 
 const Contact = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -50,18 +48,49 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await axios.post(`${BACKEND_URL}/api/contact/send-quote`, formData);
-      
-      if (response.data.status === 'success') {
-        toast.success('Thank you! We will respond within 24 hours.');
-        setFormData({
-          name: '',
-          company: '',
-          email: '',
-          packagingType: '',
-          message: ''
-        });
+      // Insert into Supabase
+      const { data, error } = await supabase
+        .from('contact_submissions')
+        .insert([
+          {
+            name: formData.name,
+            company: formData.company,
+            email: formData.email,
+            packaging_type: formData.packagingType,
+            message: formData.message,
+            submitted_at: new Date().toISOString()
+          }
+        ])
+        .select();
+
+      if (error) {
+        throw error;
       }
+
+      // Call Edge Function to send email
+      const { error: emailError } = await supabase.functions.invoke('send-contact-email', {
+        body: {
+          name: formData.name,
+          company: formData.company,
+          email: formData.email,
+          packagingType: formData.packagingType,
+          message: formData.message
+        }
+      });
+
+      if (emailError) {
+        console.error('Email error:', emailError);
+        // Still show success even if email fails (data is saved)
+      }
+
+      toast.success('Thank you! We will respond within 24 hours.');
+      setFormData({
+        name: '',
+        company: '',
+        email: '',
+        packagingType: '',
+        message: ''
+      });
     } catch (error) {
       console.error('Form submission error:', error);
       toast.error('Failed to send enquiry. Please try again or email us directly at aurecopackaging@gmail.com');
