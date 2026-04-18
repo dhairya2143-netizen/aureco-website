@@ -38,7 +38,7 @@ const Industries = () => {
     <section id="industries" className="industries-section" ref={sectionRef}>
       <div className="industries-container">
         <div className={`industries-header ${isVisible ? 'visible' : ''}`}>
-          <h2 className="industries-title">Who We Serve</h2>
+          <h2 className="industries-title">Built for Fashion. Ready for Anyone.</h2>
           <p className="industries-subtitle">
             We work primarily with clothing brands, fashion designers, and apparel retailers — 
             but our solutions extend to any brand that values the unboxing moment.
