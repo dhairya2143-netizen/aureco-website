@@ -17,7 +17,7 @@ export const products = [
     id: 1,
     name: "Tags",
     description: "Premium hang tags that make the first impression.",
-    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/0cexqddt_ChatGPT%20Image%20Apr%2017%2C%202026%2C%2006_48_15%20PM.png",
+    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/ugmw3k7f_labels%20shirt.png",
     icon: "Tag"
   },
   {
@@ -52,28 +52,28 @@ export const products = [
     id: 6,
     name: "Drawstring Bags",
     description: "Soft jute drawstring bags for jewelry and accessories.",
-    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/a55du9re_premium_1.jpg",
+    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/hjqutyax_drawstring%20bag.png",
     icon: "Leaf"
   },
   {
     id: 7,
     name: "Labels - Cotton, Woven, Satin",
     description: "The name inside every garment.",
-    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/na4id4xm_1cbc1ef4-d2bc-4e0a-8f63-1cd03c3cbec7_cleanup.png",
+    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/54ybh8lb_label%20tshirt.png",
     icon: "Tag"
   },
   {
     id: 8,
     name: "Waterproof Kraft Mailers",
     description: "Durable, eco-friendly shipping solutions.",
-    image: "https://images.unsplash.com/photo-1704634616623-b14a1a192a49",
+    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/imr5mpt0_waterproof%20craft%20mailers.png",
     icon: "Mail"
   },
   {
     id: 9,
     name: "Shopping Bags",
     description: "Carry your brand further with premium paper bags.",
-    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/8757jka0_51cb4f08-3086-402c-94fe-3e5918306d1b%20%281%29.png",
+    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/hn7mdvf7_shopping%20bags.png",
     icon: "ShoppingCart"
   },
   {
