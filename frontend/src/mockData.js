@@ -59,7 +59,7 @@ export const products = [
     id: 7,
     name: "Labels - Cotton, Woven, Satin",
     description: "The name inside every garment.",
-    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/lq1lnmlh_premium_2.jpg",
+    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/na4id4xm_1cbc1ef4-d2bc-4e0a-8f63-1cd03c3cbec7_cleanup.png",
     icon: "Tag"
   },
   {
