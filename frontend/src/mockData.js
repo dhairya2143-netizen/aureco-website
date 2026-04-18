@@ -131,7 +131,7 @@ export const packagingTypes = [
 export const navLinks = [
   { name: "About", href: "#about" },
   { name: "Products", href: "#products" },
-  { name: "Industries", href: "#industries" },
+  { name: "Who We Serve", href: "#industries" },
   { name: "Contact", href: "#contact" }
 ];
 
