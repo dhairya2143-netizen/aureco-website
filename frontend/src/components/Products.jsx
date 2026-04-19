@@ -25,6 +25,8 @@ const Products = () => {
   const cardsRef = useRef([]);
 
   useEffect(() => {
+    const currentSection = sectionRef.current;
+    
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -34,18 +36,20 @@ const Products = () => {
       { threshold: 0.1 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    if (currentSection) {
+      observer.observe(currentSection);
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      if (currentSection) {
+        observer.unobserve(currentSection);
       }
     };
   }, []);
 
   useEffect(() => {
+    const currentCards = [...cardsRef.current];
+    
     // Create intersection observer for individual cards
     const cardObserver = new IntersectionObserver(
       (entries) => {
@@ -63,12 +67,12 @@ const Products = () => {
     );
 
     // Observe all card elements
-    cardsRef.current.forEach((card) => {
+    currentCards.forEach((card) => {
       if (card) cardObserver.observe(card);
     });
 
     return () => {
-      cardsRef.current.forEach((card) => {
+      currentCards.forEach((card) => {
         if (card) cardObserver.unobserve(card);
       });
     };
