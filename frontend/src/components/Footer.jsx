@@ -1,5 +1,6 @@
 import React from 'react';
 import { navLinks, footerData } from '../mockData';
+import { Instagram, Mail, Phone } from 'lucide-react';
 
 const Footer = () => {
   const scrollToSection = (e, href) => {
@@ -40,8 +41,23 @@ const Footer = () => {
           </nav>
 
           <div className="footer-contact">
-            <a href={`mailto:${footerData.email}`}>{footerData.email}</a>
-            <a href={`tel:${footerData.phone}`}>{footerData.phone}</a>
+            <a href={`mailto:${footerData.email}`} className="footer-contact-item">
+              <Mail size={18} />
+              <span>{footerData.email}</span>
+            </a>
+            <a href={`tel:${footerData.phone}`} className="footer-contact-item">
+              <Phone size={18} />
+              <span>{footerData.phone}</span>
+            </a>
+            <a 
+              href={footerData.instagram} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="footer-contact-item footer-instagram"
+            >
+              <Instagram size={18} />
+              <span>@aurecopackaging</span>
+            </a>
           </div>
         </div>
 

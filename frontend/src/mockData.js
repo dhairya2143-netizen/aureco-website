@@ -139,5 +139,6 @@ export const footerData = {
   tagline: "Packaging with Purpose.",
   email: "aurecopackaging@gmail.com",
   phone: "+91 70414 97055",
+  instagram: "https://www.instagram.com/aurecopackaging",
   copyright: "© 2025 Aureco. All rights reserved."
 };
