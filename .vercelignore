@@ -1,0 +1,17 @@
+# Ignore backend - we're using Supabase instead
+backend/
+__pycache__/
+*.py[cod]
+*.pyc
+.Python
+venv/
+ENV/
+
+# Ignore development files
+.env.local
+.env.development
+*.log
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
