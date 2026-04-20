@@ -56,12 +56,14 @@ const Products = () => {
     const carousel = carouselRef.current;
     if (!carousel) return;
 
+    let animationFrameId = null;
+    let isScrolling = false;
+
     const updateCardTransforms = () => {
       const carouselRect = carousel.getBoundingClientRect();
       const carouselCenter = carouselRect.left + carouselRect.width / 2;
-      const newTransforms = {};
 
-      cardsRef.current.forEach((card, index) => {
+      cardsRef.current.forEach((card) => {
         if (!card) return;
 
         const cardRect = card.getBoundingClientRect();
@@ -69,38 +71,57 @@ const Products = () => {
         
         // Calculate distance from carousel center
         const distanceFromCenter = Math.abs(cardCenter - carouselCenter);
-        const maxDistance = carouselRect.width / 2;
+        const maxDistance = carouselRect.width / 2 + 200;
         
-        // Normalize distance (0 = center, 1 = edge)
+        // Normalize distance (0 = center, 1 = far)
         const normalizedDistance = Math.min(distanceFromCenter / maxDistance, 1);
         
-        // Calculate transforms based on position
-        const translateY = normalizedDistance * 40; // Move down when away from center
-        const scale = 1 - (normalizedDistance * 0.1); // Slightly smaller when away
-        const opacity = 1 - (normalizedDistance * 0.3); // Fade when away
+        // Smooth easing function
+        const eased = normalizedDistance * normalizedDistance;
         
-        // Check if card is in view
-        const isInView = cardRect.right > carouselRect.left && cardRect.left < carouselRect.right;
+        // Calculate transforms
+        const translateY = eased * 30;
+        const scale = 1 - (eased * 0.08);
+        const opacity = 1 - (eased * 0.25);
         
-        newTransforms[index] = {
-          translateY: isInView ? translateY : 60,
-          scale: isInView ? scale : 0.9,
-          opacity: isInView ? opacity : 0.4
-        };
+        // Check if card is in viewport
+        const isInView = cardRect.right > carouselRect.left - 100 && cardRect.left < carouselRect.right + 100;
+        
+        // Apply transforms directly to DOM for better performance
+        if (isInView) {
+          card.style.transform = `translateY(${translateY}px) scale(${scale})`;
+          card.style.opacity = opacity;
+        } else {
+          card.style.transform = 'translateY(50px) scale(0.92)';
+          card.style.opacity = '0.3';
+        }
       });
 
-      setCardTransforms(newTransforms);
+      isScrolling = false;
     };
 
-    // Initial calculation
+    const handleScroll = () => {
+      if (!isScrolling) {
+        isScrolling = true;
+        if (animationFrameId) {
+          cancelAnimationFrame(animationFrameId);
+        }
+        animationFrameId = requestAnimationFrame(updateCardTransforms);
+      }
+    };
+
+    // Initial render
     updateCardTransforms();
 
-    // Update on scroll
-    carousel.addEventListener('scroll', updateCardTransforms);
+    // Smooth scroll handling
+    carousel.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', updateCardTransforms);
 
     return () => {
-      carousel.removeEventListener('scroll', updateCardTransforms);
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+      carousel.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', updateCardTransforms);
     };
   }, [isVisible]);
@@ -115,7 +136,6 @@ const Products = () => {
         <div className="products-track">
           {products.map((product, index) => {
             const IconComponent = iconMap[product.icon] || Tag;
-            const transform = cardTransforms[index] || { translateY: 60, scale: 0.9, opacity: 0 };
             
             return (
               <div
@@ -124,9 +144,7 @@ const Products = () => {
                 data-card-id={product.id}
                 className="product-card"
                 style={{
-                  transform: `translateY(${transform.translateY}px) scale(${transform.scale})`,
-                  opacity: transform.opacity,
-                  transition: 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease'
+                  transition: 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease'
                 }}
                 onClick={() => setSelectedProduct(product)}
               >
@@ -148,6 +166,16 @@ const Products = () => {
 
       {selectedProduct && (
         <ProductGalleryModal
+          product={selectedProduct}
+          onClose={() => setSelectedProduct(null)}
+        />
+      )}
+    </section>
+  );
+};
+
+export default Products;
+ <ProductGalleryModal
           product={selectedProduct}
           onClose={() => setSelectedProduct(null)}
         />
