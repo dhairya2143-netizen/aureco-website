@@ -1090,9 +1090,44 @@ a, button {
     flex: 0 0 350px;
   }
 
+  .industries-section {
+    padding: 4rem 1rem;
+  }
+
+  .industries-header {
+    margin-bottom: 2.5rem;
+    padding: 0 0.5rem;
+  }
+
+  .industries-title {
+    font-size: 1.85rem;
+  }
+
+  .industries-subtitle {
+    font-size: 0.95rem;
+  }
+
   .industries-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding: 0 0.5rem;
+  }
+
+  .industry-card {
+    padding: 1.75rem 1.25rem;
+  }
+
+  .industry-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .industry-title {
+    font-size: 1.3rem;
+  }
+
+  .industry-description {
+    font-size: 0.9rem;
   }
 
   .industry-card {
