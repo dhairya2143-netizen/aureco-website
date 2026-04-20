@@ -188,7 +188,9 @@ a, button {
   height: 100%;
   background-size: cover;
   background-position: center;
-  animation: slowZoom 20s ease-in-out infinite alternate;
+  background-repeat: no-repeat;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 
 .hero-overlay {

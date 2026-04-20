@@ -3,7 +3,7 @@
 export const heroData = {
   headline: "Packaging with Purpose.",
   subheadline: "Premium packaging solutions for fashion and jewelry brands.",
-  image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/vowzigog_51cb4f08-3086-402c-94fe-3e5918306d1b_cleanup.png"
+  image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/6fujor80_51cb4f08-3086-402c-94fe-3e5918306d1b_cleanup.png"
 };
 
 export const aboutData = {
