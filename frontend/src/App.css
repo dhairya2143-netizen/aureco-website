@@ -234,7 +234,7 @@ a, button {
   font-family: 'Playfair Display', serif;
   font-size: 5rem;
   font-weight: 700;
-  color: var(--aureco-charcoal);
+  color: var(--aureco-green);
   line-height: 1.1;
   margin-bottom: 1.5rem;
 }
@@ -242,9 +242,9 @@ a, button {
 .hero-subheadline {
   font-family: 'DM Sans', sans-serif;
   font-size: 1.4rem;
-  color: var(--aureco-charcoal);
+  color: var(--aureco-dark-green);
   line-height: 1.6;
-  opacity: 0.85;
+  opacity: 0.9;
 }
 
 .hero-cta {
