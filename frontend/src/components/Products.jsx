@@ -48,21 +48,30 @@ const Products = () => {
   }, []);
 
   useEffect(() => {
+    if (!isVisible) return;
+
     const currentCards = [...cardsRef.current];
+    const carousel = document.querySelector('.products-carousel');
     
-    // Create intersection observer for individual cards
+    // Immediately show first 2 cards
+    setVisibleCards([products[0]?.id.toString(), products[1]?.id.toString()].filter(Boolean));
+
+    // Create intersection observer for horizontal scroll
     const cardObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const cardId = entry.target.getAttribute('data-card-id');
-            setVisibleCards((prev) => [...new Set([...prev, cardId])]);
+            if (cardId) {
+              setVisibleCards((prev) => [...new Set([...prev, cardId])]);
+            }
           }
         });
       },
       {
+        root: carousel,
         threshold: 0.3,
-        rootMargin: '0px'
+        rootMargin: '0px 50px 0px 0px'
       }
     );
 
@@ -71,12 +80,32 @@ const Products = () => {
       if (card) cardObserver.observe(card);
     });
 
+    // Also observe on scroll
+    const handleScroll = () => {
+      currentCards.forEach((card, index) => {
+        if (card) {
+          const rect = card.getBoundingClientRect();
+          const isInView = rect.left < window.innerWidth && rect.right > 0;
+          if (isInView) {
+            setVisibleCards((prev) => [...new Set([...prev, products[index]?.id.toString()])]);
+          }
+        }
+      });
+    };
+
+    if (carousel) {
+      carousel.addEventListener('scroll', handleScroll);
+    }
+
     return () => {
       currentCards.forEach((card) => {
         if (card) cardObserver.unobserve(card);
       });
+      if (carousel) {
+        carousel.removeEventListener('scroll', handleScroll);
+      }
     };
-  }, [isVisible]);
+  }, [isVisible, products]);
 
   return (
     <section id="products" className="products-section" ref={sectionRef}>
