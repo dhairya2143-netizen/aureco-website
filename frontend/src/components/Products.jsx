@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { products } from '../mockData';
-import { Tag, ShoppingBag, Leaf, ShoppingCart, Package, Mail, Box, Gift, Heart } from 'lucide-react';
+import { Tag, ShoppingBag, Sparkles, FileText, Leaf, ShoppingCart, Package, Mail, Box, Gift, Heart } from 'lucide-react';
 import ProductGalleryModal from './ProductGalleryModal';
 
 const iconMap = {
   Tag: Tag,
   ShoppingTag: Tag,
   ShoppingBag: ShoppingBag,
+  Sparkles: Sparkles,
+  FileText: FileText,
   Leaf: Leaf,
   Store: ShoppingCart,
   ShoppingCart: ShoppingCart,
@@ -20,9 +22,10 @@ const iconMap = {
 const Products = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [visibleCards, setVisibleCards] = useState([]);
+  const [cardTransforms, setCardTransforms] = useState({});
   const sectionRef = useRef(null);
   const cardsRef = useRef([]);
+  const carouselRef = useRef(null);
 
   useEffect(() => {
     const currentSection = sectionRef.current;
@@ -50,62 +53,57 @@ const Products = () => {
   useEffect(() => {
     if (!isVisible) return;
 
-    const currentCards = [...cardsRef.current];
-    const carousel = document.querySelector('.products-carousel');
-    
-    // Immediately show first 2 cards
-    setVisibleCards([products[0]?.id.toString(), products[1]?.id.toString()].filter(Boolean));
+    const carousel = carouselRef.current;
+    if (!carousel) return;
 
-    // Create intersection observer for horizontal scroll
-    const cardObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const cardId = entry.target.getAttribute('data-card-id');
-            if (cardId) {
-              setVisibleCards((prev) => [...new Set([...prev, cardId])]);
-            }
-          }
-        });
-      },
-      {
-        root: carousel,
-        threshold: 0.3,
-        rootMargin: '0px 50px 0px 0px'
-      }
-    );
+    const updateCardTransforms = () => {
+      const carouselRect = carousel.getBoundingClientRect();
+      const carouselCenter = carouselRect.left + carouselRect.width / 2;
+      const newTransforms = {};
 
-    // Observe all card elements
-    currentCards.forEach((card) => {
-      if (card) cardObserver.observe(card);
-    });
+      cardsRef.current.forEach((card, index) => {
+        if (!card) return;
 
-    // Also observe on scroll
-    const handleScroll = () => {
-      currentCards.forEach((card, index) => {
-        if (card) {
-          const rect = card.getBoundingClientRect();
-          const isInView = rect.left < window.innerWidth && rect.right > 0;
-          if (isInView) {
-            setVisibleCards((prev) => [...new Set([...prev, products[index]?.id.toString()])]);
-          }
-        }
+        const cardRect = card.getBoundingClientRect();
+        const cardCenter = cardRect.left + cardRect.width / 2;
+        
+        // Calculate distance from carousel center
+        const distanceFromCenter = Math.abs(cardCenter - carouselCenter);
+        const maxDistance = carouselRect.width / 2;
+        
+        // Normalize distance (0 = center, 1 = edge)
+        const normalizedDistance = Math.min(distanceFromCenter / maxDistance, 1);
+        
+        // Calculate transforms based on position
+        const translateY = normalizedDistance * 40; // Move down when away from center
+        const scale = 1 - (normalizedDistance * 0.1); // Slightly smaller when away
+        const opacity = 1 - (normalizedDistance * 0.3); // Fade when away
+        
+        // Check if card is in view
+        const isInView = cardRect.right > carouselRect.left && cardRect.left < carouselRect.right;
+        
+        newTransforms[index] = {
+          translateY: isInView ? translateY : 60,
+          scale: isInView ? scale : 0.9,
+          opacity: isInView ? opacity : 0.4
+        };
       });
+
+      setCardTransforms(newTransforms);
     };
 
-    if (carousel) {
-      carousel.addEventListener('scroll', handleScroll);
-    }
+    // Initial calculation
+    updateCardTransforms();
+
+    // Update on scroll
+    carousel.addEventListener('scroll', updateCardTransforms);
+    window.addEventListener('resize', updateCardTransforms);
 
     return () => {
-      currentCards.forEach((card) => {
-        if (card) cardObserver.unobserve(card);
-      });
-      if (carousel) {
-        carousel.removeEventListener('scroll', handleScroll);
-      }
+      carousel.removeEventListener('scroll', updateCardTransforms);
+      window.removeEventListener('resize', updateCardTransforms);
     };
-  }, [isVisible, products]);
+  }, [isVisible]);
 
   return (
     <section id="products" className="products-section" ref={sectionRef}>
@@ -113,17 +111,23 @@ const Products = () => {
         <h2 className={`products-title ${isVisible ? 'visible' : ''}`}>What We Make</h2>
       </div>
       
-      <div className="products-carousel">
+      <div className="products-carousel" ref={carouselRef}>
         <div className="products-track">
           {products.map((product, index) => {
             const IconComponent = iconMap[product.icon] || Tag;
-            const isCardVisible = visibleCards.includes(product.id.toString());
+            const transform = cardTransforms[index] || { translateY: 60, scale: 0.9, opacity: 0 };
+            
             return (
               <div
                 key={product.id}
                 ref={(el) => (cardsRef.current[index] = el)}
                 data-card-id={product.id}
-                className={`product-card ${isCardVisible ? 'card-visible' : ''}`}
+                className="product-card"
+                style={{
+                  transform: `translateY(${transform.translateY}px) scale(${transform.scale})`,
+                  opacity: transform.opacity,
+                  transition: 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease'
+                }}
                 onClick={() => setSelectedProduct(product)}
               >
                 <div className="product-image" style={{ backgroundImage: `url(${product.image})` }}>
