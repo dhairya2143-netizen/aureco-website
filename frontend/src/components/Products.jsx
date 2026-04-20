@@ -175,13 +175,3 @@ const Products = () => {
 };
 
 export default Products;
- <ProductGalleryModal
-          product={selectedProduct}
-          onClose={() => setSelectedProduct(null)}
-        />
-      )}
-    </section>
-  );
-};
-
-export default Products;
