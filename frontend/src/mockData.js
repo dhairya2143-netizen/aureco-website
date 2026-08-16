@@ -3,7 +3,7 @@
 export const heroData = {
   headline: "Packaging with Purpose.",
   subheadline: "Premium packaging solutions for fashion and jewelry brands.",
-  image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/6fujor80_51cb4f08-3086-402c-94fe-3e5918306d1b_cleanup.png"
+  image: "/images/hero.png"
 };
 
 export const aboutData = {
@@ -17,70 +17,70 @@ export const products = [
     id: 1,
     name: "Tags",
     description: "Premium hang tags that make the first impression.",
-    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/ugmw3k7f_labels%20shirt.png",
+    image: "/images/seed-tags.jpeg",
     icon: "Tag"
   },
   {
     id: 2,
     name: "Thank You Cards",
     description: "Express gratitude with elegant branded cards.",
-    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/l074bovr_thank%20you%20cards.png",
+    image: "/images/thank-you-cards.jpeg",
     icon: "Heart"
   },
   {
     id: 3,
     name: "Wrapping Papers with Stickers",
     description: "Custom branded wrapping paper and matching stickers.",
-    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/pgsq3jgs_wrapping%20papers.png",
+    image: "/images/wrapping-papers.jpeg",
     icon: "Gift"
   },
   {
     id: 4,
     name: "Tote Bags",
     description: "Reusable cotton tote bags for everyday elegance.",
-    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/ceaa8suk_tote%20bag.png",
+    image: "/images/tote-bag.png",
     icon: "ShoppingBag"
   },
   {
     id: 5,
     name: "Flapbags",
     description: "Premium paper bags with branded fold-over flaps.",
-    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/xncifeyv_flap%20bags.png",
+    image: "/images/flap-bags.jpeg",
     icon: "Package"
   },
   {
     id: 6,
     name: "Drawstring Bags",
     description: "Soft jute drawstring bags for jewelry and accessories.",
-    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/hjqutyax_drawstring%20bag.png",
+    image: "/images/drawstring-bags.jpeg",
     icon: "Leaf"
   },
   {
     id: 7,
     name: "Labels - Cotton, Woven, Satin",
     description: "The name inside every garment.",
-    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/54ybh8lb_label%20tshirt.png",
+    image: "/images/labels-cotton-woven-satin.jpeg",
     icon: "Tag"
   },
   {
     id: 8,
     name: "Waterproof Kraft Mailers",
     description: "Durable, eco-friendly shipping solutions.",
-    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/imr5mpt0_waterproof%20craft%20mailers.png",
+    image: "/images/craft-mailers.jpeg",
     icon: "Mail"
   },
   {
     id: 9,
     name: "Shopping Bags",
     description: "Carry your brand further with premium paper bags.",
-    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/hn7mdvf7_shopping%20bags.png",
+    image: "/images/shopping-bags.jpeg",
     icon: "ShoppingCart"
   },
   {
     id: 10,
     name: "Ecobox",
     description: "Sustainable packaging boxes for conscious brands.",
-    image: "https://customer-assets.emergentagent.com/job_wrapped-intent/artifacts/obo8gqnr_ecoboxes.jpeg",
+    image: "/images/ecoboxes.jpeg",
     icon: "Box"
   }
 ];
