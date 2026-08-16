@@ -19,6 +19,19 @@ const iconMap = {
   Heart: Heart
 };
 
+// Card art direction is 4:5. Trimming the top and bottom off a tall photo is
+// safe — the subject sits in the middle. Trimming the sides off a landscape one
+// throws away half the shot, so those get letterboxed instead.
+const CARD_ASPECT = 4 / 5;
+const MAX_WIDTH_LOSS = 0.25;
+
+const fitImage = (img) => {
+  const { naturalWidth: w, naturalHeight: h } = img;
+  if (!w || !h) return;
+  const widthLoss = w / h > CARD_ASPECT ? 1 - CARD_ASPECT / (w / h) : 0;
+  img.parentElement.classList.toggle('is-letterboxed', widthLoss > MAX_WIDTH_LOSS);
+};
+
 const Products = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -148,7 +161,13 @@ const Products = () => {
                 }}
                 onClick={() => setSelectedProduct(product)}
               >
-                <div className="product-image" style={{ backgroundImage: `url(${product.image})` }}>
+                <div className="product-media" style={{ '--fill': `url(${product.image})` }}>
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    loading="lazy"
+                    onLoad={(e) => fitImage(e.currentTarget)}
+                  />
                   <div className="product-overlay" />
                 </div>
                 <div className="product-content">
