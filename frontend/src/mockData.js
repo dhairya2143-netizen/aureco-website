@@ -17,21 +17,21 @@ export const products = [
     id: 1,
     name: "Tags",
     description: "Premium hang tags that make the first impression.",
-    image: "/images/labels-shirt.png",
+    image: "/images/seed-tags.jpeg",
     icon: "Tag"
   },
   {
     id: 2,
     name: "Thank You Cards",
     description: "Express gratitude with elegant branded cards.",
-    image: "/images/thank-you-cards.png",
+    image: "/images/thank-you-cards.jpeg",
     icon: "Heart"
   },
   {
     id: 3,
     name: "Wrapping Papers with Stickers",
     description: "Custom branded wrapping paper and matching stickers.",
-    image: "/images/wrapping-papers.png",
+    image: "/images/wrapping-papers.jpeg",
     icon: "Gift"
   },
   {
@@ -45,35 +45,35 @@ export const products = [
     id: 5,
     name: "Flapbags",
     description: "Premium paper bags with branded fold-over flaps.",
-    image: "/images/flap-bags.png",
+    image: "/images/flap-bags.jpeg",
     icon: "Package"
   },
   {
     id: 6,
     name: "Drawstring Bags",
     description: "Soft jute drawstring bags for jewelry and accessories.",
-    image: "/images/drawstring-bag.png",
+    image: "/images/drawstring-bags.jpeg",
     icon: "Leaf"
   },
   {
     id: 7,
     name: "Labels - Cotton, Woven, Satin",
     description: "The name inside every garment.",
-    image: "/images/label-tshirt.png",
+    image: "/images/labels-cotton-woven-satin.jpeg",
     icon: "Tag"
   },
   {
     id: 8,
     name: "Waterproof Kraft Mailers",
     description: "Durable, eco-friendly shipping solutions.",
-    image: "/images/waterproof-craft-mailers.png",
+    image: "/images/craft-mailers.jpeg",
     icon: "Mail"
   },
   {
     id: 9,
     name: "Shopping Bags",
     description: "Carry your brand further with premium paper bags.",
-    image: "/images/shopping-bags.png",
+    image: "/images/shopping-bags.jpeg",
     icon: "ShoppingCart"
   },
   {
