@@ -3,7 +3,7 @@
 export const heroData = {
   headline: "Packaging with Purpose.",
   subheadline: "Premium packaging solutions for fashion and jewelry brands.",
-  image: "/images/hero.png"
+  image: "/images/hero.webp"
 };
 
 export const aboutData = {
@@ -17,70 +17,70 @@ export const products = [
     id: 1,
     name: "Tags",
     description: "Premium hang tags that make the first impression.",
-    image: "/images/seed-tags.jpeg",
+    image: "/images/seed-tags.webp",
     icon: "Tag"
   },
   {
     id: 2,
     name: "Thank You Cards",
     description: "Express gratitude with elegant branded cards.",
-    image: "/images/thank-you-cards.jpeg",
+    image: "/images/thank-you-cards.webp",
     icon: "Heart"
   },
   {
     id: 3,
     name: "Wrapping Papers with Stickers",
     description: "Custom branded wrapping paper and matching stickers.",
-    image: "/images/wrapping-papers.jpeg",
+    image: "/images/wrapping-papers.webp",
     icon: "Gift"
   },
   {
     id: 4,
     name: "Tote Bags",
     description: "Reusable cotton tote bags for everyday elegance.",
-    image: "/images/tote-bag.png",
+    image: "/images/tote-bag.webp",
     icon: "ShoppingBag"
   },
   {
     id: 5,
     name: "Flapbags",
     description: "Premium paper bags with branded fold-over flaps.",
-    image: "/images/flap-bags.jpeg",
+    image: "/images/flap-bags.webp",
     icon: "Package"
   },
   {
     id: 6,
     name: "Drawstring Bags",
     description: "Soft jute drawstring bags for jewelry and accessories.",
-    image: "/images/drawstring-bags.jpeg",
+    image: "/images/drawstring-bags.webp",
     icon: "Leaf"
   },
   {
     id: 7,
     name: "Labels - Cotton, Woven, Satin",
     description: "The name inside every garment.",
-    image: "/images/labels-cotton-woven-satin.jpeg",
+    image: "/images/labels-cotton-woven-satin.webp",
     icon: "Tag"
   },
   {
     id: 8,
     name: "Waterproof Kraft Mailers",
     description: "Durable, eco-friendly shipping solutions.",
-    image: "/images/craft-mailers.jpeg",
+    image: "/images/craft-mailers.webp",
     icon: "Mail"
   },
   {
     id: 9,
     name: "Shopping Bags",
     description: "Carry your brand further with premium paper bags.",
-    image: "/images/shopping-bags.jpeg",
+    image: "/images/shopping-bags.webp",
     icon: "ShoppingCart"
   },
   {
     id: 10,
     name: "Ecobox",
     description: "Sustainable packaging boxes for conscious brands.",
-    image: "/images/ecoboxes.jpeg",
+    image: "/images/ecoboxes.webp",
     icon: "Box"
   }
 ];
