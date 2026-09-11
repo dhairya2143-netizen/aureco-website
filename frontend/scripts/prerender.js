@@ -22,10 +22,26 @@ const bail = (msg, err) => {
   process.exit(0);
 };
 
+// CI (Vercel/Linux) uses @sparticuz/chromium: its binary ships inside
+// node_modules so it survives Vercel's dependency cache, unlike puppeteer's
+// postinstall download. Local dev falls back to full puppeteer.
+async function launchBrowser() {
+  if (process.platform === 'linux') {
+    try {
+      const chromium = require('@sparticuz/chromium');
+      const core = require('puppeteer-core');
+      return await core.launch({
+        args: [...chromium.args, '--no-sandbox', '--disable-setuid-sandbox'],
+        executablePath: await chromium.executablePath(),
+        headless: true,
+      });
+    } catch (e) { console.warn(`[prerender] sparticuz launch failed (${e.message}), trying puppeteer`); }
+  }
+  const puppeteer = require('puppeteer');
+  return puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+}
+
 (async () => {
-  let puppeteer;
-  try { puppeteer = require('puppeteer'); }
-  catch (e) { bail('puppeteer not installed', e); }
 
   const server = http.createServer((req, res) => {
     const urlPath = decodeURIComponent(req.url.split('?')[0]);
@@ -40,7 +56,7 @@ const bail = (msg, err) => {
 
   let browser;
   try {
-    browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+    browser = await launchBrowser();
   } catch (e) { server.close(); bail('could not launch Chrome', e); }
 
   try {
