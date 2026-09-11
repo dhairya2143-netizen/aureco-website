@@ -17,8 +17,16 @@ const MIME = {
   '.woff2': 'font/woff2', '.woff': 'font/woff', '.map': 'application/json',
 };
 
+// Outcome is also written into the deployed build so it can be read from
+// production at /prerender-log.txt (Vercel build logs need dashboard access).
+const logLines = [`node ${process.version} ${process.platform}/${process.arch} ${new Date().toISOString()}`];
+const log = (line) => { logLines.push(line); console.warn(`[prerender] ${line}`); };
+const flushLog = () => {
+  try { fs.writeFileSync(path.join(BUILD, 'prerender-log.txt'), logLines.join('\n') + '\n'); } catch {}
+};
 const bail = (msg, err) => {
-  console.warn(`[prerender] skipped: ${msg}${err ? ` (${err.message})` : ''}`);
+  log(`skipped: ${msg}${err ? ` (${err.stack ? err.stack.split('\n').slice(0, 3).join(' | ') : err.message})` : ''}`);
+  flushLog();
   process.exit(0);
 };
 
@@ -35,7 +43,7 @@ async function launchBrowser() {
         executablePath: await chromium.executablePath(),
         headless: true,
       });
-    } catch (e) { console.warn(`[prerender] sparticuz launch failed (${e.message}), trying puppeteer`); }
+    } catch (e) { log(`sparticuz launch failed (${e.stack ? e.stack.split('\n').slice(0, 3).join(' | ') : e.message}), trying puppeteer`); }
   }
   const puppeteer = require('puppeteer');
   return puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
@@ -77,7 +85,8 @@ async function launchBrowser() {
       throw new Error(`output looks wrong (${html.length} bytes)`);
     }
     fs.writeFileSync(path.join(BUILD, 'index.html'), '<!DOCTYPE html>\n' + html.replace(/^<!DOCTYPE html>/i, ''));
-    console.log(`[prerender] wrote build/index.html (${(html.length / 1024).toFixed(0)} kB rendered)`);
+    log(`ok: wrote build/index.html (${(html.length / 1024).toFixed(0)} kB rendered)`);
+    flushLog();
   } catch (e) {
     bail('render failed, keeping original index.html', e);
   } finally {
