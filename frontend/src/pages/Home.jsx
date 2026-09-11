@@ -4,6 +4,7 @@ import About from '../components/About';
 import Products from '../components/Products';
 import WrapReveal from '../components/WrapReveal';
 import Industries from '../components/Industries';
+import FAQ from '../components/FAQ';
 import Contact from '../components/Contact';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -39,6 +40,7 @@ const Home = () => {
       <Products />
       <WrapReveal />
       <Industries />
+      <FAQ />
       <Contact />
       <Footer />
       <WhatsAppButton />

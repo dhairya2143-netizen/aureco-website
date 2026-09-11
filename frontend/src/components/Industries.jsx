@@ -11,13 +11,16 @@ const iconMap = {
 
 const Industries = () => {
   return (
-    <section id="industries" className="industries-section">
+    <section id="industries" className="industries-section" aria-labelledby="industries-title">
       <div className="industries-container">
         <div className="industries-header">
-          <h2 className="industries-title" data-paper>Built for Fashion. Ready for Anyone.</h2>
+          <h2 className="industries-title" id="industries-title" data-paper>
+            Built for Fashion. Ready for Anyone.
+          </h2>
           <p className="industries-subtitle" data-paper data-paper-delay={90}>
-            We work primarily with clothing brands, fashion designers, and apparel retailers,
-            but our solutions extend to any brand that values the unboxing moment.
+            Aureco works primarily with clothing brands, fashion designers, apparel retailers
+            and jewellery boutiques in India, but our packaging suits any brand that values
+            the unboxing moment.
           </p>
         </div>
 
@@ -31,7 +34,7 @@ const Industries = () => {
                 data-paper
                 data-paper-delay={180 + index * 90}
               >
-                <div className="industry-icon">
+                <div className="industry-icon" aria-hidden="true">
                   <IconComponent size={32} />
                 </div>
                 <h3 className="industry-title">{industry.title}</h3>

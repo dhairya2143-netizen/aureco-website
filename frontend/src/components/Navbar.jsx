@@ -25,10 +25,14 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`} aria-label="Main navigation">
       <div className="navbar-container">
         <div className="navbar-logo">
-          <a href="/" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
+          <a
+            href="/"
+            aria-label="Aureco home, packaging for fashion brands"
+            onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+          >
             Aureco
           </a>
         </div>
@@ -57,14 +61,18 @@ const Navbar = () => {
 
         <button
           className="mobile-menu-button"
+          type="button"
+          aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-menu"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
-          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          {mobileMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
         </button>
       </div>
 
       {mobileMenuOpen && (
-        <div className="mobile-menu">
+        <div className="mobile-menu" id="mobile-menu">
           {navLinks.map((link) => (
             <a
               key={link.name}

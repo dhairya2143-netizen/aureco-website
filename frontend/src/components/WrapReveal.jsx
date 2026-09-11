@@ -30,10 +30,10 @@ const WrapReveal = () => {
   }, []);
 
   return (
-    <section id="wrap-reveal" className="wrap-reveal-section">
+    <section id="wrap-reveal" className="wrap-reveal-section" aria-labelledby="wrap-reveal-title">
       <div className="wrap-reveal-container">
         <div className="wrap-reveal-header">
-          <h2 className="wrap-reveal-title" data-paper>See it made up.</h2>
+          <h2 className="wrap-reveal-title" id="wrap-reveal-title" data-paper>See it made up.</h2>
           <p className="wrap-reveal-subtitle" data-paper data-paper-delay={90}>
             Our own packaging suite, produced exactly the way yours would be.
           </p>
@@ -49,7 +49,7 @@ const WrapReveal = () => {
               >
                 <img
                   src={item.image}
-                  alt={item.name}
+                  alt={item.alt || item.name}
                   width={item.w}
                   height={item.h}
                   loading="lazy"

@@ -10,12 +10,18 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="hero-section">
-      <div className="hero-background-image" style={{ backgroundImage: `url(${heroData.image})` }} />
-      <div className="hero-overlay" />
+    <section className="hero-section" aria-label="Aureco custom packaging for fashion brands">
+      <div
+        className="hero-background-image"
+        style={{ backgroundImage: `url(${heroData.image})` }}
+        role="img"
+        aria-label={heroData.imageAlt}
+      />
+      <div className="hero-overlay" aria-hidden="true" />
       <div className="hero-content">
         <div className={`hero-text ${isVisible ? 'visible' : ''}`}>
-          <div className="hero-divider" />
+          <p className="hero-eyebrow">{heroData.eyebrow}</p>
+          <div className="hero-divider" aria-hidden="true" />
           <h1 className="hero-headline">{heroData.headline}</h1>
           <p className="hero-subheadline">{heroData.subheadline}</p>
         </div>

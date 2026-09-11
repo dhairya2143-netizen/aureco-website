@@ -140,12 +140,28 @@ const Products = () => {
   }, [isVisible]);
 
   return (
-    <section id="products" className="products-section" ref={sectionRef}>
+    <section
+      id="products"
+      className="products-section"
+      ref={sectionRef}
+      aria-labelledby="products-title"
+    >
       <div className="products-header">
-        <h2 className="products-title" data-paper>What We Make</h2>
+        <h2 className="products-title" id="products-title" data-paper>
+          What We Make
+        </h2>
+        <p className="products-intro" data-paper data-paper-delay={90}>
+          Ten custom packaging products for clothing brands, from the hang tag on the garment
+          to the mailer it ships in. Tap any product to see it up close.
+        </p>
       </div>
-      
-      <div className="products-carousel" ref={carouselRef}>
+
+      <div
+        className="products-carousel"
+        ref={carouselRef}
+        role="group"
+        aria-label="Aureco packaging products, scroll horizontally"
+      >
         <div className="products-track">
           {products.map((product, index) => {
             const IconComponent = iconMap[product.icon] || Tag;
@@ -159,19 +175,28 @@ const Products = () => {
                 style={{
                   transition: 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease'
                 }}
+                role="button"
+                tabIndex={0}
+                aria-label={`${product.name}: view details and request a quote`}
                 onClick={() => setSelectedProduct(product)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setSelectedProduct(product);
+                  }
+                }}
               >
                 <div className="product-media" style={{ '--fill': `url(${product.image})` }}>
                   <img
                     src={product.image}
-                    alt={product.name}
+                    alt={product.alt || product.name}
                     loading="lazy"
                     onLoad={(e) => fitImage(e.currentTarget)}
                   />
                   <div className="product-overlay" />
                 </div>
                 <div className="product-content">
-                  <div className="product-icon">
+                  <div className="product-icon" aria-hidden="true">
                     <IconComponent size={28} />
                   </div>
                   <h3 className="product-name">{product.name}</h3>
