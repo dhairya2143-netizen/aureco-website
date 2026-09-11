@@ -1,8 +1,10 @@
 {
-  "buildCommand": "yarn build",
+  "buildCommand": "yarn build && node scripts/prerender.js",
   "outputDirectory": "build",
   "devCommand": "yarn start",
-  "installCommand": "yarn install",
+  "installCommand": "yarn install --production=false",
   "framework": "create-react-app",
-  "regions": ["sin1"]
+  "regions": [
+    "sin1"
+  ]
 }
