@@ -36,7 +36,8 @@ const bail = (msg, err) => {
 async function launchBrowser() {
   if (process.platform === 'linux') {
     try {
-      const chromium = require('@sparticuz/chromium');
+      const mod = require('@sparticuz/chromium');
+      const chromium = mod.default || mod; // v122+ ships an ESM default export
       const core = require('puppeteer-core');
       return await core.launch({
         args: [...chromium.args, '--no-sandbox', '--disable-setuid-sandbox'],
