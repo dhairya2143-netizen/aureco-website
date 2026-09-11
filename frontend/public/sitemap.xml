@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://aureco-website.vercel.app/</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://aureco-website.vercel.app/images/seed-tags.webp</image:loc>
+      <image:title>Custom hang tags for clothing brands</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://aureco-website.vercel.app/images/labels-cotton-woven-satin.webp</image:loc>
+      <image:title>Cotton, woven and satin clothing labels</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://aureco-website.vercel.app/images/craft-mailers.webp</image:loc>
+      <image:title>Waterproof kraft mailer bags</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://aureco-website.vercel.app/images/shopping-bags.webp</image:loc>
+      <image:title>Custom printed paper shopping bags</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://aureco-website.vercel.app/images/drawstring-bags.webp</image:loc>
+      <image:title>Cotton and jute drawstring bags</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://aureco-website.vercel.app/images/wrapping-papers.webp</image:loc>
+      <image:title>Custom wrapping paper and stickers</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://aureco-website.vercel.app/images/flap-bags.webp</image:loc>
+      <image:title>Paper flap bags with branded fold-over closure</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://aureco-website.vercel.app/images/tote-bag.webp</image:loc>
+      <image:title>Printed cotton tote bags</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://aureco-website.vercel.app/images/thank-you-cards.webp</image:loc>
+      <image:title>Branded thank you cards</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://aureco-website.vercel.app/images/ecoboxes.webp</image:loc>
+      <image:title>Recyclable eco packaging boxes</image:title>
+    </image:image>
+  </url>
+</urlset>

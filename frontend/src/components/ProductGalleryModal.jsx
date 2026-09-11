@@ -4,19 +4,26 @@ import { X } from 'lucide-react';
 const ProductGalleryModal = ({ product, onClose }) => {
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <button className="modal-close" onClick={onClose}>
-          <X size={24} />
+      <div
+        className="modal-content"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button className="modal-close" type="button" aria-label="Close product details" onClick={onClose}>
+          <X size={24} aria-hidden="true" />
         </button>
         <div className="modal-image">
-          <img src={product.image} alt={product.name} />
+          <img src={product.image} alt={product.alt || product.name} />
         </div>
         <div className="modal-info">
-          <h3 className="modal-title">{product.name}</h3>
+          <h3 className="modal-title" id="modal-title">{product.name}</h3>
           <p className="modal-description">{product.description}</p>
           <p className="modal-text">
-            Our {product.name.toLowerCase()} are crafted with precision and sustainability in mind. 
-            Each piece is designed to elevate your brand and create lasting impressions with your customers.
+            Every piece is custom made for your brand: your artwork, your colours, your sizes,
+            on recyclable or natural materials wherever the product allows. Send us the quantity
+            and deadline and we will quote it.
           </p>
           <button className="modal-cta" onClick={() => {
             onClose();

@@ -20,12 +20,13 @@ const Footer = () => {
       <div className="footer-divider" />
       <div className="footer-container">
         <div className="footer-content">
-          <div className="footer-brand">
-            <h3 className="footer-logo">Aureco</h3>
+          <div className="footer-brand" data-paper>
+            <h2 className="footer-logo">Aureco</h2>
             <p className="footer-tagline">{footerData.tagline}</p>
+            <p className="footer-blurb">{footerData.blurb}</p>
           </div>
 
-          <nav className="footer-nav">
+          <nav className="footer-nav" data-paper data-paper-delay={90} aria-label="Footer navigation">
             <a href="/" onClick={(e) => scrollToSection(e, '/')}>
               Home
             </a>
@@ -40,22 +41,31 @@ const Footer = () => {
             ))}
           </nav>
 
-          <div className="footer-contact">
-            <a href={`mailto:${footerData.email}`} className="footer-contact-item">
-              <Mail size={18} />
+          <div className="footer-contact" data-paper data-paper-delay={180}>
+            <a
+              href={`mailto:${footerData.email}`}
+              className="footer-contact-item"
+              aria-label={`Email Aureco at ${footerData.email}`}
+            >
+              <Mail size={18} aria-hidden="true" />
               <span>{footerData.email}</span>
             </a>
-            <a href={`tel:${footerData.phone}`} className="footer-contact-item">
-              <Phone size={18} />
+            <a
+              href={`tel:${footerData.phone}`}
+              className="footer-contact-item"
+              aria-label={`Call Aureco on ${footerData.phone}`}
+            >
+              <Phone size={18} aria-hidden="true" />
               <span>{footerData.phone}</span>
             </a>
-            <a 
-              href={footerData.instagram} 
-              target="_blank" 
+            <a
+              href={footerData.instagram}
+              target="_blank"
               rel="noopener noreferrer"
               className="footer-contact-item footer-instagram"
+              aria-label="Aureco on Instagram, opens in a new tab"
             >
-              <Instagram size={18} />
+              <Instagram size={18} aria-hidden="true" />
               <span>@aurecopackaging</span>
             </a>
           </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { industries } from '../mockData';
 import { Scissors, Shirt, Store, Gem } from 'lucide-react';
 
@@ -10,53 +10,31 @@ const iconMap = {
 };
 
 const Industries = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const currentSection = sectionRef.current;
-    
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    if (currentSection) {
-      observer.observe(currentSection);
-    }
-
-    return () => {
-      if (currentSection) {
-        observer.unobserve(currentSection);
-      }
-    };
-  }, []);
-
   return (
-    <section id="industries" className="industries-section" ref={sectionRef}>
+    <section id="industries" className="industries-section" aria-labelledby="industries-title">
       <div className="industries-container">
-        <div className={`industries-header ${isVisible ? 'visible' : ''}`}>
-          <h2 className="industries-title">Built for Fashion. Ready for Anyone.</h2>
-          <p className="industries-subtitle">
-            We work primarily with clothing brands, fashion designers, and apparel retailers — 
-            but our solutions extend to any brand that values the unboxing moment.
+        <div className="industries-header">
+          <h2 className="industries-title" id="industries-title" data-paper>
+            Built for Fashion. Ready for Anyone.
+          </h2>
+          <p className="industries-subtitle" data-paper data-paper-delay={90}>
+            Aureco works primarily with clothing brands, fashion designers, apparel retailers
+            and jewellery boutiques in India, but our packaging suits any brand that values
+            the unboxing moment.
           </p>
         </div>
-        
+
         <div className="industries-grid">
           {industries.map((industry, index) => {
             const IconComponent = iconMap[industry.icon] || Store;
             return (
               <div
                 key={industry.id}
-                className={`industry-card ${isVisible ? 'visible' : ''}`}
-                style={{ animationDelay: `${index * 0.15}s` }}
+                className="industry-card"
+                data-paper
+                data-paper-delay={180 + index * 90}
               >
-                <div className="industry-icon">
+                <div className="industry-icon" aria-hidden="true">
                   <IconComponent size={32} />
                 </div>
                 <h3 className="industry-title">{industry.title}</h3>

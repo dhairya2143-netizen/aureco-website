@@ -102,13 +102,28 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="contact-section" ref={sectionRef}>
+    <section
+      id="contact"
+      className="contact-section"
+      ref={sectionRef}
+      aria-labelledby="contact-title"
+    >
       <div className="contact-container">
-        <div className={`contact-header ${isVisible ? 'visible' : ''}`}>
-          <h2 className="contact-title">Let's Build Something Beautiful.</h2>
+        <div className="contact-header" data-paper>
+          <h2 className="contact-title" id="contact-title">Let's Build Something Beautiful.</h2>
+          <p className="contact-intro">
+            Tell us the packaging type, the rough quantity and your deadline, and we will come
+            back with a quote. Aureco replies within 24 hours.
+          </p>
         </div>
 
-        <form onSubmit={handleSubmit} className={`contact-form ${isVisible ? 'visible' : ''}`}>
+        <form
+          onSubmit={handleSubmit}
+          className="contact-form"
+          data-paper
+          data-paper-delay={90}
+          aria-label="Request a custom packaging quote"
+        >
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="name">Name</label>
