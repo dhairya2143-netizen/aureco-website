@@ -104,11 +104,11 @@ const Contact = () => {
   return (
     <section id="contact" className="contact-section" ref={sectionRef}>
       <div className="contact-container">
-        <div className={`contact-header ${isVisible ? 'visible' : ''}`}>
+        <div className="contact-header" data-paper>
           <h2 className="contact-title">Let's Build Something Beautiful.</h2>
         </div>
 
-        <form onSubmit={handleSubmit} className={`contact-form ${isVisible ? 'visible' : ''}`}>
+        <form onSubmit={handleSubmit} className="contact-form" data-paper data-paper-delay={90}>
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="name">Name</label>

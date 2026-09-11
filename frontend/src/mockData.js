@@ -8,7 +8,7 @@ export const heroData = {
 
 export const aboutData = {
   headline: "Packaging is the first thing your customer touches.",
-  body: "Aureco partners with fashion designers and clothing labels to design and produce every packaging touchpoint — beautifully crafted, sustainably sourced, and built to carry your brand story.",
+  body: "Aureco partners with fashion designers and clothing labels to design and produce every packaging touchpoint: beautifully crafted, sustainably sourced, and built to carry your brand story.",
   image: "https://images.unsplash.com/photo-1760022638435-aad7c1e684b6"
 };
 
@@ -142,3 +142,24 @@ export const footerData = {
   instagram: "https://www.instagram.com/aurecopackaging",
   copyright: "© 2025 Aureco. All rights reserved."
 };
+
+export const revealItems = [
+  { id: 1, image: '/images/reveal/drawstring-detail.webp', w: 900, h: 900,
+    name: 'Drawstring bags',
+    note: 'Cotton, with a woven label sewn into the seam.' },
+  { id: 2, image: '/images/reveal/brand-card.webp', w: 900, h: 900,
+    name: 'Business cards',
+    note: 'Textured stock, deboss, and a raised leaf mark.' },
+  { id: 3, image: '/images/reveal/woven-label.webp', w: 537, h: 720,
+    name: 'Woven labels',
+    note: 'The name inside every garment.' },
+  { id: 4, image: '/images/reveal/card-stack.webp', w: 506, h: 900,
+    name: 'Seed paper cards',
+    note: 'Printed on plantable stock, ready to ship.' },
+  { id: 5, image: '/images/reveal/wrapping-rolls.webp', w: 900, h: 491,
+    name: 'Wrapping paper and stickers',
+    note: 'Made as a matched set, never as separate buys.' },
+  { id: 6, image: '/images/reveal/tote-detail.webp', w: 900, h: 491,
+    name: 'Tote bags',
+    note: 'Folded, tied, and tagged before they reach you.' },
+];

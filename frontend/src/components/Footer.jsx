@@ -20,12 +20,12 @@ const Footer = () => {
       <div className="footer-divider" />
       <div className="footer-container">
         <div className="footer-content">
-          <div className="footer-brand">
+          <div className="footer-brand" data-paper>
             <h3 className="footer-logo">Aureco</h3>
             <p className="footer-tagline">{footerData.tagline}</p>
           </div>
 
-          <nav className="footer-nav">
+          <nav className="footer-nav" data-paper data-paper-delay={90}>
             <a href="/" onClick={(e) => scrollToSection(e, '/')}>
               Home
             </a>
@@ -40,7 +40,7 @@ const Footer = () => {
             ))}
           </nav>
 
-          <div className="footer-contact">
+          <div className="footer-contact" data-paper data-paper-delay={180}>
             <a href={`mailto:${footerData.email}`} className="footer-contact-item">
               <Mail size={18} />
               <span>{footerData.email}</span>

@@ -1,8 +1,8 @@
 import React from 'react';
 
-const LoadingAnimation = () => {
+const LoadingAnimation = ({ dismissed = false }) => {
   return (
-    <div className="loading-animation">
+    <div className={`loading-animation${dismissed ? ' is-dismissed' : ''}`}>
       <div className="logo-fade">
         <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
           <text

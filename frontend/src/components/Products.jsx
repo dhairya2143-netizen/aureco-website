@@ -142,7 +142,7 @@ const Products = () => {
   return (
     <section id="products" className="products-section" ref={sectionRef}>
       <div className="products-header">
-        <h2 className={`products-title ${isVisible ? 'visible' : ''}`}>What We Make</h2>
+        <h2 className="products-title" data-paper>What We Make</h2>
       </div>
       
       <div className="products-carousel" ref={carouselRef}>

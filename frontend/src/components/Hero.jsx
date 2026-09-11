@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { heroData } from '../mockData';
+import HangTag from './HangTag';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -18,6 +19,7 @@ const Hero = () => {
           <h1 className="hero-headline">{heroData.headline}</h1>
           <p className="hero-subheadline">{heroData.subheadline}</p>
         </div>
+        <HangTag />
       </div>
     </section>
   );
