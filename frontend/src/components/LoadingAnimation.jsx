@@ -12,7 +12,7 @@ const LoadingAnimation = ({ dismissed = false }) => {
             textAnchor="middle"
             fontSize="32"
             fontFamily="Playfair Display, serif"
-            fill="#6B8E3E"
+            fill="#6E9934"
             className="logo-text"
           >
             Aureco
