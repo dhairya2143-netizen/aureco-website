@@ -1,47 +1,39 @@
 import React from 'react';
 import { industries } from '../mockData';
-import { Scissors, Shirt, Store, Gem } from 'lucide-react';
-
-const iconMap = {
-  Scissors: Scissors,
-  Shirt: Shirt,
-  Store: Store,
-  Gem: Gem
-};
 
 const Industries = () => {
   return (
     <section id="industries" className="industries-section" aria-labelledby="industries-title">
       <div className="industries-container">
         <div className="industries-header">
-          <h2 className="industries-title" id="industries-title" data-paper>
-            Built for Fashion. Ready for Anyone.
+          <span className="eyebrow" data-paper>Who we serve</span>
+          <h2 className="industries-title" id="industries-title" data-paper data-paper-delay={90}>
+            Built for fashion, ready for anyone
           </h2>
-          <p className="industries-subtitle" data-paper data-paper-delay={90}>
-            Aureco works primarily with clothing brands, fashion designers, apparel retailers
-            and jewellery boutiques in India, but our packaging suits any brand that values
+          <p className="industries-subtitle" data-paper data-paper-delay={180}>
+            We work primarily with clothing brands, fashion designers, apparel retailers
+            and jewellery boutiques across India. The packaging suits any brand that values
             the unboxing moment.
           </p>
         </div>
 
         <div className="industries-grid">
-          {industries.map((industry, index) => {
-            const IconComponent = iconMap[industry.icon] || Store;
-            return (
-              <div
-                key={industry.id}
-                className="industry-card"
-                data-paper
-                data-paper-delay={180 + index * 90}
-              >
-                <div className="industry-icon" aria-hidden="true">
-                  <IconComponent size={32} />
-                </div>
+          {industries.map((industry, index) => (
+            <div
+              key={industry.id}
+              className="industry-card"
+              data-paper
+              data-paper-delay={180 + index * 90}
+            >
+              <span className="industry-index" aria-hidden="true">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <div className="industry-body">
                 <h3 className="industry-title">{industry.title}</h3>
                 <p className="industry-description">{industry.description}</p>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
       </div>
     </section>

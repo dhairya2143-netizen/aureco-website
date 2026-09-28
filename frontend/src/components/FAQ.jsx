@@ -8,10 +8,11 @@ const FAQ = () => (
   <section id="faq" className="faq-section" aria-labelledby="faq-title">
     <div className="faq-container">
       <div className="faq-header">
-        <h2 className="faq-title" id="faq-title" data-paper>
+        <span className="eyebrow" data-paper>Good to know</span>
+        <h2 className="faq-title" id="faq-title" data-paper data-paper-delay={90}>
           Questions brands ask us
         </h2>
-        <p className="faq-subtitle" data-paper data-paper-delay={90}>
+        <p className="faq-subtitle" data-paper data-paper-delay={180}>
           Minimum orders, materials, lead times and cost, answered plainly before you enquire.
         </p>
       </div>

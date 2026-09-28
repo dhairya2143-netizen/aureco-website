@@ -6,8 +6,9 @@ const About = () => {
     <section id="about" className="about-section" aria-labelledby="about-title">
       <div className="about-container">
         <div className="about-text">
-          <h2 className="about-headline" id="about-title" data-paper>{aboutData.headline}</h2>
-          <p className="about-body" data-paper data-paper-delay={90}>{aboutData.body}</p>
+          <span className="eyebrow" data-paper>Our craft</span>
+          <h2 className="about-headline" id="about-title" data-paper data-paper-delay={90}>{aboutData.headline}</h2>
+          <p className="about-body" data-paper data-paper-delay={180}>{aboutData.body}</p>
         </div>
         <div className="about-image-wrapper" data-paper data-paper-delay={180}>
           <div

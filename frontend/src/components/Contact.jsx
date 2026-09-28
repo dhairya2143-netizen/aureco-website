@@ -109,19 +109,26 @@ const Contact = () => {
       aria-labelledby="contact-title"
     >
       <div className="contact-container">
-        <div className="contact-header" data-paper>
-          <h2 className="contact-title" id="contact-title">Let's Build Something Beautiful.</h2>
-          <p className="contact-intro">
+        <aside className="contact-aside">
+          <span className="eyebrow" data-paper>Start a project</span>
+          <h2 className="contact-title" id="contact-title" data-paper data-paper-delay={90}>
+            Let us build something <em>beautiful</em>
+          </h2>
+          <p className="contact-intro" data-paper data-paper-delay={180}>
             Tell us the packaging type, the rough quantity and your deadline, and we will come
-            back with a quote. Aureco replies within 24 hours.
+            back with a quote within 24 hours.
           </p>
-        </div>
+          <div className={`contact-info ${isVisible ? 'visible' : ''}`}>
+            <p>Prefer email?</p>
+            <a href="mailto:aurecopackaging@gmail.com">aurecopackaging@gmail.com</a>
+          </div>
+        </aside>
 
         <form
           onSubmit={handleSubmit}
           className="contact-form"
           data-paper
-          data-paper-delay={90}
+          data-paper-delay={120}
           aria-label="Request a custom packaging quote"
         >
           <div className="form-row">
@@ -199,11 +206,6 @@ const Contact = () => {
             {isSubmitting ? 'Sending...' : 'Send Enquiry'}
           </button>
         </form>
-
-        <div className={`contact-info ${isVisible ? 'visible' : ''}`}>
-          <p>We typically respond within 24 hours.</p>
-          <a href="mailto:aurecopackaging@gmail.com">aurecopackaging@gmail.com</a>
-        </div>
       </div>
     </section>
   );

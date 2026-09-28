@@ -145,16 +145,17 @@ const FilmHero = () => {
         m.dpr = dpr;
         canvas.width = Math.round(cw * dpr);
         canvas.height = Math.round(ch * dpr);
-        // Contain fit: the whole frame is always visible, never cropped. The
-        // frames share the stage's paper backdrop, so the letterbox is invisible.
-        // A reserved band at the bottom keeps the cue and progress dash off the
-        // subject on short viewports.
-        const reserve = 76;
-        const fit = Math.min(cw / FRAME_W, (ch - reserve) / FRAME_H);
+        // Contain fit, centred on screen. The frame's cream backdrop is a photo
+        // gradient that never flat-matches the page cream, so instead of relying
+        // on a colour match we feather the frame edges to transparent at draw
+        // time (see drawFrame): the product floats on the page with no visible
+        // box. Centring both axes keeps the animation in the middle of the view.
+        const fit = Math.min(cw / FRAME_W, ch / FRAME_H);
         m.dw = FRAME_W * fit;
         m.dh = FRAME_H * fit;
         m.dx = (cw - m.dw) / 2;
-        m.dy = (ch - reserve - m.dh) / 2;
+        m.dy = (ch - m.dh) / 2;
+        m.feather = Math.min(90, m.dw * 0.16, m.dh * 0.16);
         needsDrawRef.current = true;
       }
     };
@@ -179,6 +180,26 @@ const FilmHero = () => {
       ctx.setTransform(m.dpr, 0, 0, m.dpr, 0, 0);
       ctx.clearRect(0, 0, m.cw, m.ch);
       ctx.drawImage(frames[idx], m.dx, m.dy, m.dw, m.dh);
+
+      // Feather all four edges to transparent so the frame's photo backdrop melts
+      // into the page cream instead of reading as a lighter rectangle. The product
+      // always sits centred with cream margins, so nothing meaningful is erased.
+      const f = m.feather || 0;
+      if (f > 0) {
+        ctx.globalCompositeOperation = 'destination-out';
+        const edge = (x0, y0, x1, y1, rx, ry, rw, rh) => {
+          const g = ctx.createLinearGradient(x0, y0, x1, y1);
+          g.addColorStop(0, 'rgba(0,0,0,1)');
+          g.addColorStop(1, 'rgba(0,0,0,0)');
+          ctx.fillStyle = g;
+          ctx.fillRect(rx, ry, rw, rh);
+        };
+        edge(m.dx, 0, m.dx + f, 0, m.dx, m.dy, f, m.dh);                       // left
+        edge(m.dx + m.dw, 0, m.dx + m.dw - f, 0, m.dx + m.dw - f, m.dy, f, m.dh); // right
+        edge(0, m.dy, 0, m.dy + f, m.dx, m.dy, m.dw, f);                       // top
+        edge(0, m.dy + m.dh, 0, m.dy + m.dh - f, m.dx, m.dy + m.dh - f, m.dw, f); // bottom
+        ctx.globalCompositeOperation = 'source-over';
+      }
     };
 
     const setNum = (el, prop, value, key) => {
@@ -393,10 +414,13 @@ const FilmHero = () => {
           Aureco
         </span>
         <div className="film-intro" ref={introRef}>
-          <p className="film-intro-kicker">Sustainable, made in India</p>
-          <h1 className="film-intro-title">Custom Packaging for Fashion Brands</h1>
+          <p className="film-intro-kicker">Sustainable &middot; Made in India</p>
+          <h1 className="film-intro-title">
+            The packaging your <em>garment</em> deserves
+          </h1>
           <p className="film-intro-sub">
-            One order, packed before your eyes: label, tissue, box, ribbon, tag, bag.
+            Custom hang tags, woven labels, tissue, boxes and bags for fashion brands.
+            Watch one order pack itself.
           </p>
         </div>
         <p className="film-cue" ref={cueRef} aria-hidden="true">
