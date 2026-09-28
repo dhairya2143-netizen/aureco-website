@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import Hero from '../components/Hero';
+import ScrollFilmHero from '../components/ScrollFilmHero';
 import About from '../components/About';
 import Products from '../components/Products';
-import WrapReveal from '../components/WrapReveal';
 import Industries from '../components/Industries';
 import FAQ from '../components/FAQ';
 import Contact from '../components/Contact';
@@ -35,10 +34,9 @@ const Home = () => {
     <div className="home-container">
       <LoadingAnimation dismissed={!loading} />
       <Navbar />
-      <Hero />
+      <ScrollFilmHero />
       <About />
       <Products />
-      <WrapReveal />
       <Industries />
       <FAQ />
       <Contact />
