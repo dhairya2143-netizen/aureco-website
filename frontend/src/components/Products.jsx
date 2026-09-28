@@ -1,28 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { products } from '../mockData';
-import { Tag, ShoppingBag, Sparkles, FileText, Leaf, ShoppingCart, Package, Mail, Box, Gift, Heart } from 'lucide-react';
 import ProductGalleryModal from './ProductGalleryModal';
 
-const iconMap = {
-  Tag: Tag,
-  ShoppingTag: Tag,
-  ShoppingBag: ShoppingBag,
-  Sparkles: Sparkles,
-  FileText: FileText,
-  Leaf: Leaf,
-  Store: ShoppingCart,
-  ShoppingCart: ShoppingCart,
-  Package: Package,
-  Mail: Mail,
-  Box: Box,
-  Gift: Gift,
-  Heart: Heart
-};
-
-// Card art direction is 4:5. Trimming the top and bottom off a tall photo is
+// Card art direction is 3:4. Trimming the top and bottom off a tall photo is
 // safe — the subject sits in the middle. Trimming the sides off a landscape one
 // throws away half the shot, so those get letterboxed instead.
-const CARD_ASPECT = 4 / 5;
+const CARD_ASPECT = 3 / 4;
 const MAX_WIDTH_LOSS = 0.25;
 
 const fitImage = (img) => {
@@ -147,13 +130,16 @@ const Products = () => {
       aria-labelledby="products-title"
     >
       <div className="products-header">
-        <h2 className="products-title" id="products-title" data-paper>
-          What We Make
-        </h2>
-        <p className="products-intro" data-paper data-paper-delay={90}>
-          Ten custom packaging products for clothing brands, from the hang tag on the garment
-          to the mailer it ships in. Tap any product to see it up close.
-        </p>
+        <span className="eyebrow" data-paper>The suite</span>
+        <div className="products-header-row">
+          <h2 className="products-title" id="products-title" data-paper data-paper-delay={90}>
+            Everything the garment wears
+          </h2>
+          <p className="products-intro" data-paper data-paper-delay={180}>
+            Ten custom packaging pieces for clothing brands, from the hang tag on the garment
+            to the mailer it ships in. Tap any piece to see it up close.
+          </p>
+        </div>
       </div>
 
       <div
@@ -164,8 +150,6 @@ const Products = () => {
       >
         <div className="products-track">
           {products.map((product, index) => {
-            const IconComponent = iconMap[product.icon] || Tag;
-            
             return (
               <div
                 key={product.id}
@@ -196,10 +180,10 @@ const Products = () => {
                   <div className="product-overlay" />
                 </div>
                 <div className="product-content">
-                  <div className="product-icon" aria-hidden="true">
-                    <IconComponent size={28} />
+                  <div className="product-caption-row">
+                    <h3 className="product-name">{product.name}</h3>
+                    <span className="product-view" aria-hidden="true">View</span>
                   </div>
-                  <h3 className="product-name">{product.name}</h3>
                   <p className="product-description">{product.description}</p>
                 </div>
               </div>
