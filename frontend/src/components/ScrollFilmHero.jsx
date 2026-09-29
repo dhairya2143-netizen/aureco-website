@@ -161,17 +161,26 @@ const FilmHero = () => {
         m.dpr = dpr;
         canvas.width = Math.round(cw * dpr);
         canvas.height = Math.round(ch * dpr);
-        // Contain fit, centred on screen. The frame's cream backdrop is a photo
-        // gradient that never flat-matches the page cream, so instead of relying
-        // on a colour match we feather the frame edges to transparent at draw
-        // time (see drawFrame): the product floats on the page with no visible
-        // box. Centring both axes keeps the animation in the middle of the view.
-        const fit = Math.min(cw / FRAME_W, ch / FRAME_H);
+        // Centred on both axes. The feather (see drawFrame) melts the edges into
+        // the page cream, so there is no visible box.
+        // Wide screens: contain, so the whole 16:9 frame shows and fills the
+        // width. Phones: a 16:9 frame contained in a tall portrait viewport is
+        // tiny, so we scale it up to fill most of the height (drawing wider than
+        // the screen and letting the cream sides crop off). The product sits
+        // centred in every frame, so it stays in view.
+        const contain = Math.min(cw / FRAME_W, ch / FRAME_H);
+        const cover = Math.max(cw / FRAME_W, ch / FRAME_H);
+        const mobile = cw <= 768;
+        const fit = mobile
+          ? Math.min(Math.max((ch * 0.56) / FRAME_H, cw / FRAME_W), cover)
+          : contain;
         m.dw = FRAME_W * fit;
         m.dh = FRAME_H * fit;
         m.dx = (cw - m.dw) / 2;
         m.dy = (ch - m.dh) / 2;
-        m.feather = Math.min(90, m.dw * 0.16, m.dh * 0.16);
+        // Feather only edges that fall inside the viewport; when the frame is
+        // drawn wider than the screen the side edges are off-screen already.
+        m.feather = Math.min(90, m.dh * 0.16, mobile ? 200 : m.dw * 0.16);
         needsDrawRef.current = true;
       }
     };

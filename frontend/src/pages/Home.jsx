@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import ScrollFilmHero from '../components/ScrollFilmHero';
 import About from '../components/About';
 import Products from '../components/Products';
@@ -7,32 +7,15 @@ import FAQ from '../components/FAQ';
 import Contact from '../components/Contact';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import LoadingAnimation from '../components/LoadingAnimation';
 import WhatsAppButton from '../components/WhatsAppButton';
 import { initPaperMotion } from '../lib/paperMotion';
 
 const Home = () => {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const dismiss = () => setLoading(false);
-    const cap = setTimeout(dismiss, 600);
-    window.addEventListener('load', dismiss);
-
-    return () => {
-      clearTimeout(cap);
-      window.removeEventListener('load', dismiss);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (loading) return;
-    return initPaperMotion();
-  }, [loading]);
+  // The hero's own logo reveal is the opener now, so there is no splash loader.
+  useEffect(() => initPaperMotion(), []);
 
   return (
     <div className="home-container">
-      <LoadingAnimation dismissed={!loading} />
       <Navbar />
       <ScrollFilmHero />
       <About />
