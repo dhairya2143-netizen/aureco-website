@@ -1793,7 +1793,77 @@ a, button {
   width: 100%;
   height: 100%;
   display: block;
-  transform-origin: 50% 45%;
+  transform-origin: 50% 48%;
+}
+
+/* Brand reveal that opens the film: the Aureco lockup fills the screen, then
+   rushes toward the viewer and dissolves as the tee (printed with the same
+   mark) settles in. On first paint it eases in so the site opens gracefully. */
+.film-logo-intro {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: 50% 48%;
+  pointer-events: none;
+  color: var(--aureco-green);
+}
+
+.film-logo-intro.is-gone {
+  visibility: hidden;
+}
+
+/* Inner element carries only the one-time open animation, so it never fights
+   the scroll-driven transform/opacity the JS writes on the outer element. */
+.film-logo-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 2rem);
+  animation: film-logo-in 1.1s var(--ease-paper) both;
+}
+
+/* The real Aureco mark, rendered from an alpha mask (image set inline from the
+   public path) so it stays crisp at any size and shows in the exact brand olive. */
+.film-logo-mark {
+  display: block;
+  width: clamp(5rem, 10vw, 9rem);
+  aspect-ratio: 811 / 789;
+  background-color: var(--aureco-green);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.film-logo-word {
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  font-size: clamp(3.5rem, 12vw, 9rem);
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+  color: var(--aureco-charcoal);
+}
+
+@keyframes film-logo-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .film-logo-inner {
+    animation: none;
+  }
 }
 
 /* Opening statement, sitting in the film's paper margin beside the tee.

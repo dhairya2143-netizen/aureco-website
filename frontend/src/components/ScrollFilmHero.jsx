@@ -1,15 +1,26 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-const FRAME_COUNT = 211;
+const FRAME_COUNT = 264;
 const FRAME_W = 1440;
 const FRAME_H = 810;
 
-// Timeline inside the pinned container: the film scrubs, the last frame holds
-// while the film chrome falls silent, then a short step-in dissolve hands the
-// viewport to the page and the navbar arrives.
+// Timeline inside the pinned container.
+//  0.00 .. LOGO_END : brand reveal. The full-screen Aureco lockup rushes toward
+//                     the viewer and dissolves while the tee, printed with the
+//                     same mark, settles in from far away. The wordmark becomes
+//                     the print on the shirt.
+//  LOGO_END .. FILM_END : the packing film scrubs, frame by frame.
+//  FILM_END .. HOLD_END : the last frame holds while the beat chrome fades.
+//  HOLD_END .. 1.00 : a short step-in dissolve hands the view to the page.
+const LOGO_END = 0.12;
+const FILM_START = 0.12;
 const FILM_END = 0.86;
 const HOLD_END = 0.9;
-const SMOOTHING = 0.28;
+const SMOOTHING = 0.26;
+// How far the tee starts "away" during the reveal, and how large the brand
+// lockup grows as it rushes past the viewer.
+const TEE_IN_SCALE = 0.74;
+const LOGO_OUT_SCALE = 2.6;
 // A restrained step toward the bag keeps every pixel sharp; the dissolve does
 // the match cut, so no deep zoom is needed.
 const EXIT_SCALE = 1.55;
@@ -17,12 +28,13 @@ const EXIT_SCALE = 1.55;
 const RELEASE = 0.96;
 const CONCURRENCY = 6;
 
+// Beat ranges scaled to the 264-frame, 10fps sequence.
 const CAPTIONS = [
-  { end: 48, index: '01', title: 'The tee' },
-  { end: 80, index: '02', title: 'The wrap' },
-  { end: 112, index: '03', title: 'The box' },
-  { end: 144, index: '04', title: 'The ribbon' },
-  { end: 176, index: '05', title: 'The tag' },
+  { end: 60, index: '01', title: 'The tee' },
+  { end: 100, index: '02', title: 'The wrap' },
+  { end: 140, index: '03', title: 'The box' },
+  { end: 180, index: '04', title: 'The ribbon' },
+  { end: 220, index: '05', title: 'The tag' },
   { end: FRAME_COUNT, index: '06', title: 'Ready' },
 ];
 
@@ -31,6 +43,9 @@ const STATIC_SUBLINE =
   'Everything your garment wears before your customer does: tags, wraps, seals, and the bag it walks out in.';
 const POSTER_ALT =
   'An off-white Aureco shopping bag standing upright, printed with the Aureco leaf mark.';
+
+const MARK_URL = `${process.env.PUBLIC_URL || ''}/aureco-mark.png`;
+const MARK_STYLE = { WebkitMaskImage: `url(${MARK_URL})`, maskImage: `url(${MARK_URL})` };
 
 const frameSrc = (n) => `/hero-frames/frame_${String(n).padStart(3, '0')}.webp`;
 const clamp01 = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
@@ -93,6 +108,7 @@ const FilmHero = () => {
   const containerRef = useRef(null);
   const stageRef = useRef(null);
   const canvasRef = useRef(null);
+  const logoIntroRef = useRef(null);
   const introRef = useRef(null);
   const cueRef = useRef(null);
   const wordmarkRef = useRef(null);
@@ -210,7 +226,7 @@ const FilmHero = () => {
     };
 
     const render = (p) => {
-      const filmP = clamp01(p / FILM_END);
+      const filmP = clamp01((p - FILM_START) / (FILM_END - FILM_START));
       const frame = Math.max(1, Math.min(FRAME_COUNT, Math.round(1 + filmP * (FRAME_COUNT - 1))));
       const idx = pickIndex(frame);
       if (idx && idx !== drawnRef.current) {
@@ -220,14 +236,29 @@ const FilmHero = () => {
 
       const last = lastRef.current;
 
-      // The opening statement yields to the film as soon as scrolling begins.
-      const intro = 1 - smoothstep(clamp01(p / 0.055));
+      // Brand reveal: the lockup rushes toward the viewer and dissolves while the
+      // tee scales up from far into place.
+      const logoP = clamp01(p / LOGO_END);
+      const logoScale = 1 + (LOGO_OUT_SCALE - 1) * smoothstep(logoP);
+      const logoAlpha = 1 - smoothstep(clamp01(logoP / 0.82));
+      setNum(logoIntroRef.current, 'opacity', logoAlpha, 'logo');
+      if (logoIntroRef.current) {
+        logoIntroRef.current.style.transform = `scale(${logoScale.toFixed(4)})`;
+        logoIntroRef.current.classList.toggle('is-gone', logoAlpha <= 0.02);
+      }
+
+      // The opening statement appears once the tee has landed, then yields.
+      const intro =
+        smoothstep(clamp01((p - LOGO_END) / 0.04)) *
+        (1 - smoothstep(clamp01((p - (LOGO_END + 0.09)) / 0.06)));
       setNum(introRef.current, 'opacity', intro, 'intro');
-      if (introRef.current) introRef.current.classList.toggle('is-gone', intro <= 0.02);
+      if (introRef.current) introRef.current.classList.toggle('is-gone', intro <= 0.02 && p > LOGO_END);
       setNum(cueRef.current, 'opacity', intro, 'cue');
 
-      // Beat chrome (caption, progress) falls silent during the hold.
-      const chrome = 1 - smoothstep(clamp01((p - FILM_END) / (HOLD_END - FILM_END)));
+      // Beat chrome (caption, progress) is silent during the reveal and the hold.
+      const chrome =
+        smoothstep(clamp01((p - LOGO_END) / 0.03)) *
+        (1 - smoothstep(clamp01((p - FILM_END) / (HOLD_END - FILM_END))));
       setNum(captionsRef.current, 'opacity', chrome, 'chrome');
       if (progressFillRef.current) {
         const fill = Math.round(filmP * 200) / 200;
@@ -240,7 +271,7 @@ const FilmHero = () => {
 
       // The wordmark stays through the quiet hold and hands off to the navbar
       // logo, which fades in at the same spot as the film releases.
-      const wordmark = 1 - clamp01((p - 0.93) / 0.04);
+      const wordmark = (1 - clamp01((p - 0.93) / 0.04)) * smoothstep(clamp01((p - LOGO_END) / 0.03));
       setNum(wordmarkRef.current, 'opacity', wordmark, 'wordmark');
 
       const ci = CAPTIONS.findIndex((c) => frame <= c.end);
@@ -251,19 +282,29 @@ const FilmHero = () => {
         last.caption = ci;
       }
 
+      // Canvas transform: scales up from far during the reveal, holds at 1 through
+      // the film, then a small step-in on exit. Opacity fades in at the reveal and
+      // out on exit.
       const exit = clamp01((p - HOLD_END) / (1 - HOLD_END));
-      const scale = 1 + (EXIT_SCALE - 1) * smoothstep(exit);
-      const alpha = 1 - smoothstep(clamp01((exit - 0.35) / 0.65));
+      let scale;
+      if (p < LOGO_END) {
+        scale = TEE_IN_SCALE + (1 - TEE_IN_SCALE) * smoothstep(logoP);
+      } else {
+        scale = 1 + (EXIT_SCALE - 1) * smoothstep(exit);
+      }
       if (Math.abs(last.scale - scale) > 0.002) {
         last.scale = scale;
-        canvas.style.transform = exit > 0 ? `scale(${scale.toFixed(4)})` : '';
+        canvas.style.transform = scale !== 1 ? `scale(${scale.toFixed(4)})` : '';
       }
+      const introAlpha = smoothstep(clamp01(logoP / 0.7));
+      const exitAlpha = 1 - smoothstep(clamp01((exit - 0.35) / 0.65));
+      const alpha = Math.min(introAlpha, exitAlpha);
       setNum(canvas, 'opacity', alpha, 'alpha');
 
-      const zooming = exit > 0;
-      if (zooming !== last.zooming) {
-        last.zooming = zooming;
-        canvas.style.willChange = zooming ? 'transform' : '';
+      const transforming = p < LOGO_END || exit > 0;
+      if (transforming !== last.zooming) {
+        last.zooming = transforming;
+        canvas.style.willChange = transforming ? 'transform' : '';
       }
 
       const live = p < RELEASE;
@@ -410,6 +451,12 @@ const FilmHero = () => {
           role="img"
           aria-label={POSTER_ALT}
         />
+        <div className="film-logo-intro" ref={logoIntroRef}>
+          <div className="film-logo-inner">
+            <span className="film-logo-mark" aria-hidden="true" style={MARK_STYLE} />
+            <span className="film-logo-word">Aureco</span>
+          </div>
+        </div>
         <span className="film-wordmark" ref={wordmarkRef} aria-hidden="true">
           Aureco
         </span>
